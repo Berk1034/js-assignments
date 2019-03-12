@@ -69,7 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    return value.substring(7, value.length - 1);
 }
 
 
@@ -84,7 +84,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value.substring(0, 1);
 }
 
 /**
@@ -99,7 +99,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.trim();
 }
 
 /**
@@ -114,7 +114,14 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+/*
+ *    var result = '';
+ *    for(var i = 0; i < count; i++){
+ *      result = result + value;
+ *    }
+ *    return result;
+ */
+    return value.repeat(count);
 }
 
 /**
@@ -130,7 +137,8 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    var i = str.indexOf(value);
+    return (str.slice(0, i) + str.slice(i + value.length, str.length));
 }
 
 /**
@@ -145,7 +153,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.slice(1, -1);
 }
 
 
@@ -160,7 +168,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -174,7 +182,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -201,7 +209,12 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    var value = '─';
+    var str = '┌' + value.repeat(width - 2) + '┐' + '\n';
+    for(var i = 1; i < height - 1; i++){
+      str = str + '│' + ' '.repeat(width - 2) +'│' + '\n';
+    }
+    return str = str + '└' + value.repeat(width - 2) + '┘' + '\n';
 }
 
 
@@ -221,7 +234,22 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    var result = '';
+    var chr;
+    for(var i = 0; i < str.length; i++){
+      chr = str.codePointAt(i);
+      if(chr > 64 && chr < 123){
+        chr = chr + 13;
+        if(str.codePointAt(i) < 91 && str.codePointAt(i) > 64 + 13){
+          chr = chr - 26;
+        }
+        if(str.codePointAt(i) < 123 && str.codePointAt(i) > 96 + 13){
+          chr = chr - 26;
+        }
+      }
+      result = result + String.fromCharCode(chr);
+    }
+    return result;
 }
 
 /**
@@ -238,7 +266,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return (typeof value == 'string' || value instanceof String);
 }
 
 
@@ -267,7 +295,55 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    var result = 0;
+    switch(value[0]){
+      case '2':
+                result = result + 1;
+                break;
+      case '3':
+                result = result + 2;
+                break;
+      case '4':
+                result = result + 3;
+                break;
+      case '5':
+                result = result + 4;
+                break;
+      case '6':
+                result = result + 5;
+                break;
+      case '7':
+                result = result + 6;
+                break;
+      case '8':
+                result = result + 7;
+                break;
+      case '9':
+                result = result + 8;
+                break;
+      case '1':
+                result = result + 9;
+                break;
+      case 'J':
+                result = result + 10;
+                break;
+      case 'Q':
+                result = result + 11;
+                break;
+      case 'K':
+                result = result + 12;
+                break;
+    }
+    if(value.includes('♦')){
+      result = result + 13;
+    }
+    if(value.includes('♥')){
+      result = result + 26;
+    }
+    if(value.includes('♠')){
+      result = result + 39;
+    }
+    return result;
 }
 
 
