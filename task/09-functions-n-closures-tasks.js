@@ -22,11 +22,13 @@
  * @return {Function}
  *
  * @example
- *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
+ *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+    return function Composition(x) {
+      return f(g(x));
+    }
 }
 
 
@@ -47,7 +49,9 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return function PowerFunction(value) {
+      return Math.pow(value,exponent);
+    };
 }
 
 
@@ -67,6 +71,23 @@ function getPowerFunction(exponent) {
 function getPolynom() {
     throw new Error('Not implemented');
 }
+  /*
+    return function Polynom(value1, value2, ...theArgs) {
+      if (theArgs.length == 0)
+        return null;
+      else
+        return new Polynomial([value1, value2, theArgs[0]]);
+    /*
+      else{
+        var res = '';
+        for(var i = theArgs.length; i=0; i--){
+            res = res + '1';
+        }
+        return res;
+      }
+    */
+//    }
+//}
 
 
 /**
