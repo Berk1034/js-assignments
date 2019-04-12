@@ -47,7 +47,7 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    let a = 0, b = 1;
+    var a = 0, b = 1;
     while (true){
       yield a;
       b = [a + b, a = b][0];
