@@ -286,7 +286,17 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    ccn = String(ccn);
+    var sum = Number(ccn[ccn.length - 1]);
+    var parity = ccn.length % 2;
+    for(var i = 0; i < ccn.length - 1; i++){
+      var digit = Number(ccn[i]);
+      if (i % 2 == parity)
+        digit = (digit * 2 > 9) ? digit * 2 - 9 : digit * 2;
+      sum += digit;
+    }
+    return sum % 10 == 0;
+//    return String(ccn).split('').reverse().map( (x) => parseInt(x) ).map( (x,idx) => idx % 2 ? x * 2 : x ).map( (x) => x > 9 ? (x % 10) + 1 : x ).reduce( (accum, x) => accum += x ) % 10 === 0;
 }
 
 
@@ -305,7 +315,7 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    return ((num - 1) % 9) + 1;
 }
 
 
@@ -367,7 +377,33 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    const min = 60;
+    const hour = 60 * min;
+    const day = 24 * hour;
+    const month = 30 * day;
+    const year = 12 * month;
+    var diff = (endDate - startDate) / 1000;
+    if (diff <= 45)
+      return 'a few seconds ago';
+    if (diff <= 90)
+      return 'a minute ago';
+    if (diff <= 45 * min)
+      return Math.round((diff - 0.001) / min) + ' minutes ago';
+    if (diff <= 90 * min)
+      return 'an hour ago';
+    if (diff <= 22 * hour)
+      return Math.round((diff - 0.001) / hour) + ' hours ago';
+    if (diff <= 36 * hour)
+      return 'a day ago';
+    if (diff <= 25 * day)
+      return Math.round((diff - 0.001) / day) + ' days ago';
+    if (diff <= 45 * day)
+      return 'a month ago';
+    if (diff <= 345 * day)
+      return Math.round((diff - 0.001) / month) + ' months ago';
+    if (diff <= 545 * day)
+      return 'a year ago';
+    return Math.round((diff - 0.001) / year) + ' years ago';
 }
 
 
@@ -391,7 +427,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
