@@ -69,7 +69,9 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    throw new Error('Not implemented');
+    var coefs = Array.from(arguments);
+    var n =  coefs.length - 1;
+    return x => coefs.reduce((p, c, i) => p + Math.pow(x, n - i) * c, 0);
 }
   /*
     return function Polynom(value1, value2, ...theArgs) {
@@ -105,7 +107,8 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    var res = func();
+    return () => res;
 }
 
 
