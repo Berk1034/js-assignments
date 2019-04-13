@@ -348,7 +348,6 @@ function isBracketsBalanced(str) {
       if (open.indexOf(str[i]) != -1) {
         stack.push(str[i]);
         continue;
-        console.log('hello');
       }
       if (open.indexOf(stack.pop()) != close.indexOf(str[i]))
         return false;
