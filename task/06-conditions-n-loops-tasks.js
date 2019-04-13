@@ -76,7 +76,7 @@ function getFactorial(n) {
  */
 function getSumBetweenNumbers(n1, n2) {
     var res = 0;
-    for(var i = n1; i<=n2; i++){
+    for(var i = n1; i <= n2; i++){
       res = res + i;
     }
     return res;
@@ -341,7 +341,19 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    var stack = [];
+    var open = ['[', '(', '<', '{'];
+    var close = [']', ')', '>', '}'];
+    for (var i = 0; i < str.length; i++) {
+      if (open.indexOf(str[i]) != -1) {
+        stack.push(str[i]);
+        continue;
+        console.log('hello');
+      }
+      if (open.indexOf(stack.pop()) != close.indexOf(str[i]))
+        return false;
+    }
+    return !stack.length;
 }
 
 
